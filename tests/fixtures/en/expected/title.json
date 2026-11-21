@@ -1,0 +1,68 @@
+[
+ {
+  "title": "I Tried Posting Daily for 30 Days (Here's What Happened)",
+  "chars": 56,
+  "score": 94,
+  "issues": [
+   [
+    "mobile",
+    "a mobile feed shows about \"I Tried Posting Daily for 30 Days...\" - check the subject survives"
+   ]
+  ],
+  "good": [
+   "56 characters, inside the 60-character desktop cut",
+   "carries a concrete figure (30)"
+  ]
+ },
+ {
+  "title": "How to edit faster",
+  "chars": 18,
+  "score": 90,
+  "issues": [
+   [
+    "no-number",
+    "no number, date or name - the most reliable single fix"
+   ]
+  ],
+  "good": [
+   "18 characters, inside the 60-character desktop cut"
+  ]
+ },
+ {
+  "title": "Why Your Thumbnails Are Losing You Views",
+  "chars": 40,
+  "score": 90,
+  "issues": [
+   [
+    "no-number",
+    "no number, date or name - the most reliable single fix"
+   ]
+  ],
+  "good": [
+   "40 characters, inside the 60-character desktop cut"
+  ]
+ },
+ {
+  "title": "The ULTIMATE Guide to YouTube Growth That Is Absolutely Everything You Need To Know In 2026",
+  "chars": 91,
+  "score": 66,
+  "issues": [
+   [
+    "length",
+    "91 characters - desktop search cuts near 60"
+   ],
+   [
+    "mobile",
+    "a mobile feed shows about \"The ULTIMATE Guide to YouTube Growth...\" - check the subject survives"
+   ],
+   [
+    "vague",
+    "everything, ultimate - swap for a number, a name or a date"
+   ]
+  ],
+  "good": [
+   "1 all-caps word for emphasis",
+   "carries a concrete figure (2026)"
+  ]
+ }
+]

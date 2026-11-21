@@ -1,0 +1,42 @@
+{
+ "points": 51,
+ "axis": "percent",
+ "start": 100.0,
+ "hook_leak": 8.0,
+ "end": 56.5,
+ "cliffs": [
+  {
+   "from": 50.0,
+   "to": 52.0,
+   "lost": 5.0,
+   "at_seconds": 300.0
+  },
+  {
+   "from": 6.0,
+   "to": 8.0,
+   "lost": 4.0,
+   "at_seconds": 36.0
+  },
+  {
+   "from": 4.0,
+   "to": 6.0,
+   "lost": 4.0,
+   "at_seconds": 24.0
+  },
+  {
+   "from": 2.0,
+   "to": 4.0,
+   "lost": 4.0,
+   "at_seconds": 12.0
+  },
+  {
+   "from": 0.0,
+   "to": 2.0,
+   "lost": 4.0,
+   "at_seconds": 0.0
+  }
+ ],
+ "slide_per_unit": 0.335,
+ "said": {},
+ "axis_from": "header"
+}
