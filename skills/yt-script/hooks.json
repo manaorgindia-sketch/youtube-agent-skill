@@ -136,7 +136,7 @@
    "match": [
     "\\b(broke|break|breaking) (it )?down\\b",
     "\\bteardown\\b",
-    "\\banalys(ed|ed|is|e)\\b",
+    "\\banalys(ed|is|e)\\b",
     "\\bI pulled\\b"
    ]
   },
@@ -161,8 +161,7 @@
    "match": [
     "\\bdo not\\b",
     "\\bdon'?t (upload|post|publish|start)\\b",
-    "\\bbefore you\\b",
-    "\\bstop\\b"
+    "\\bbefore you\\b"
    ]
   },
   {
