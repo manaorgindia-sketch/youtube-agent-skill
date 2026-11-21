@@ -1,0 +1,48 @@
+{
+ "points": 60,
+ "axis": "seconds",
+ "start": 100.0,
+ "hook_leak": 9.0,
+ "end": 57.4,
+ "cliffs": [
+  {
+   "from": 300.0,
+   "to": 310.0,
+   "lost": 6.0,
+   "at_seconds": 300.0
+  },
+  {
+   "from": 120.0,
+   "to": 130.0,
+   "lost": 6.0,
+   "at_seconds": 120.0
+  },
+  {
+   "from": 20.0,
+   "to": 30.0,
+   "lost": 3.0,
+   "at_seconds": 20.0
+  },
+  {
+   "from": 10.0,
+   "to": 20.0,
+   "lost": 3.0,
+   "at_seconds": 10.0
+  },
+  {
+   "from": 0.0,
+   "to": 10.0,
+   "lost": 3.0,
+   "at_seconds": 0.0
+  }
+ ],
+ "slide_per_unit": 0.06,
+ "said": {
+  "300.0": "",
+  "120.0": "any video out channel run on out we at are channel people that we going today because to",
+  "20.0": "In 2024 we lost 40 percent In 2025 we lost 10 percent you know",
+  "10.0": "So today we look at retention So today we look at retention graphs properly uh, so The first thing is the hook",
+  "0.0": "Hi everyone welcome back um"
+ },
+ "axis_from": "header"
+}

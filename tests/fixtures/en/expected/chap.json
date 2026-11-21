@@ -1,0 +1,47 @@
+{
+ "valid": true,
+ "chapters": [
+  {
+   "start": 0.0,
+   "label": "0:00",
+   "draft_title": "Today Look Retention",
+   "seconds": 13.89
+  },
+  {
+   "start": 13.89,
+   "label": "0:13",
+   "draft_title": "Lost Percent First",
+   "seconds": 11.63
+  },
+  {
+   "start": 25.51,
+   "label": "0:25",
+   "draft_title": "Pacing Next Talk",
+   "seconds": 10.9
+  },
+  {
+   "start": 36.42,
+   "label": "0:36",
+   "draft_title": "Titles Carry Click",
+   "seconds": 14.68
+  },
+  {
+   "start": 51.09,
+   "label": "0:51",
+   "draft_title": "Because Figure Video",
+   "seconds": 12.57
+  },
+  {
+   "start": 63.66,
+   "label": "1:03",
+   "draft_title": "Leave Figure People",
+   "seconds": 110.62
+  },
+  {
+   "start": 174.29,
+   "label": "2:54",
+   "draft_title": "Growth Matters People",
+   "seconds": 28.27
+  }
+ ]
+}

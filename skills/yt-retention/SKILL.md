@@ -14,7 +14,11 @@ The retention graph is the only honest feedback YouTube gives you. Almost nobody
 ```bash
 python3 retention.py retention.csv --duration 600
 python3 retention.py retention.csv --transcript transcript.srt
+python3 retention.py retention.csv --axis seconds     # override when the printed axis guess is wrong
 ```
+
+The tool prints whether it read the position column as seconds or percent, and why. Check it on
+Shorts: a seconds axis that never passes 100 is the case most likely to be misread.
 
 Getting the file: Studio -> a video -> Analytics -> Engagement -> the audience-retention chart ->
 the download icon -> "Audience retention".

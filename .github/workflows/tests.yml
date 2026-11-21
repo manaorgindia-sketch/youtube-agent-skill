@@ -1,0 +1,31 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: py${{ matrix.python }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        # 3.10 is the floor; 3.13 is the last release before UTF-8 mode became the default;
+        # 3.x is the newest stable. Windows + an older Python is where Telugu encoding bugs show.
+        python: ["3.10", "3.13", "3.x"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Unit, regression and CLI tests
+        run: python -m unittest discover -s tests -v
+      - name: Every Python file parses as 3.10
+        run: python -c "import ast, glob; [ast.parse(open(f, encoding='utf-8').read(), f, feature_version=(3, 10)) for f in glob.glob('skills/**/*.py', recursive=True) + glob.glob('tests/*.py')]"
+      - name: hooks.json is valid and has 21 formulas
+        run: python -c "import json; assert len(json.load(open('skills/yt-script/hooks.json', encoding='utf-8'))['hooks']) == 21"

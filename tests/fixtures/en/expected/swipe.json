@@ -1,0 +1,37 @@
+{
+ "outliers": [
+  {
+   "channel": "Alpha",
+   "title": "I Tried AI for 30 Days",
+   "views": 150000,
+   "median": 40500,
+   "multiple": 3.7,
+   "formula": "I Tried It",
+   "url": "u0"
+  },
+  {
+   "channel": "Beta",
+   "title": "I Tried AI for 30 Days",
+   "views": 2500000,
+   "median": 675000,
+   "multiple": 3.7,
+   "formula": "I Tried It",
+   "url": "u0"
+  },
+  {
+   "channel": "Gamma",
+   "title": "I Tried AI for 30 Days",
+   "views": 40000,
+   "median": 10800,
+   "multiple": 3.7,
+   "formula": "I Tried It",
+   "url": "u0"
+  }
+ ],
+ "skipped_thin_channels": [
+  [
+   "Thin",
+   1
+  ]
+ ]
+}

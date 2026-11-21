@@ -1,0 +1,20 @@
+[
+ {
+  "title": "Why Your Thumbnails Are Losing You Views",
+  "chars": 40,
+  "score": 76,
+  "issues": [
+   [
+    "no-number",
+    "no number, date or name - the most reliable single fix"
+   ],
+   [
+    "duplicate",
+    "thumbnail repeats the title on losing, views - the thumbnail should say what the title does not"
+   ]
+  ],
+  "good": [
+   "40 characters, inside the 60-character desktop cut"
+  ]
+ }
+]

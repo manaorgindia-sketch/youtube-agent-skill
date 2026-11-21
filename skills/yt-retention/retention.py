@@ -2,12 +2,14 @@
 """retention.py - read a YouTube Studio audience-retention export and find the leaks.
 
     python3 retention.py retention.csv
+    python3 retention.py retention.csv --duration 600                # seconds, for a percent axis
     python3 retention.py retention.csv --transcript transcript.srt   # names what was said at each drop
+    python3 retention.py retention.csv --axis seconds                # override axis detection
     python3 retention.py retention.csv --json
 
 Get the file from Studio: Analytics -> a video -> Engagement -> the audience-retention chart ->
 the download icon -> "Audience retention". Two columns, a position (percent or seconds) and a
-percentage still watching.
+percentage still watching. Flags may come in any order.
 
 It reports three things, because they are three different problems with three different fixes:
   HOOK LEAK    what you lost in the first 30 seconds
@@ -15,12 +17,23 @@ It reports three things, because they are three different problems with three di
   SLIDE        the steady bleed rate across the flat middle
 
 With --transcript it prints what you were saying at each cliff, which is the only version of this
-report you can act on without scrubbing the video yourself.
+report you can act on without scrubbing the video yourself. A percent axis needs --duration for
+that, so the tool can turn 40% into a second.
+
+AXIS. The position column is read as seconds or percent from its header ("%", "percent" vs
+"second", "time"). With no header it guesses: past 100 is seconds; a series that ends well short
+of 100 is seconds (a Short); one that reaches ~100 is percent. The guess is printed. --axis wins.
 """
-import csv, json, os, re, sys
+import argparse, csv, os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "_shared"))
+try:
+    from textutil import load as load_cues, setup_stdio, dumps  # noqa: E402
+except ImportError:
+    sys.exit("retention.py needs skills/_shared/textutil.py - install the whole plugin, not one skill folder")
 
 def load_csv(path):
-    rows = []
+    """(rows, header) - rows are (position, retention); header is the first row with no numbers."""
+    rows, header = [], None
     with open(path, newline="", encoding="utf-8-sig", errors="replace") as fh:
         for r in csv.reader(fh):
             nums = []
@@ -30,20 +43,25 @@ def load_csv(path):
                 except ValueError: nums.append(None)
             vals = [n for n in nums if n is not None]
             if len(vals) >= 2: rows.append((vals[0], vals[1]))
-    return rows
+            elif not rows and header is None and any(c.strip() for c in r): header = r
+    return rows, header
 
-def main():
-    a = sys.argv[1:]
-    as_json = "--json" in a; a = [x for x in a if x != "--json"]
-    tr = a[a.index("--transcript") + 1] if "--transcript" in a else None
-    files = [x for x in a if not x.startswith("--") and x != tr]
-    if not files or not os.path.exists(files[0]): print(__doc__); sys.exit(1)
-    rows = load_csv(files[0])
-    if len(rows) < 8: print("could not read at least 8 data points from that csv"); sys.exit(1)
+def detect_axis(xs, header=None, duration=None):
+    """("percent" | "seconds", how it was decided)."""
+    if header:
+        h = header[0].lower()
+        if "%" in h or "percent" in h: return "percent", "header"
+        if any(k in h for k in ("second", "sec)", "time")): return "seconds", "header"
+    top = max(xs)
+    if top > 100.5: return "seconds", "values past 100"
+    if duration and duration < 95:
+        return ("seconds", "values fit the duration") if top <= duration * 1.05 + 1 else ("percent", "values past the duration")
+    if top >= 95: return "percent", "values reach ~100"
+    return "seconds", "values end short of 100"
+
+def analyse(rows, axis, dur=None, cues=None):
     xs = [r[0] for r in rows]; ys = [r[1] for r in rows]
-    pct_axis = max(xs) <= 100.5
-    dur = None
-    if "--duration" in a: dur = float(a[a.index("--duration") + 1])
+    pct_axis = axis == "percent"
     def at(x): return (x / 100.0 * dur) if (pct_axis and dur) else x
     start = ys[0] or 100.0
     # HOOK: the first 30 seconds, or the first 10% when the axis is a percentage and we have no duration
@@ -59,22 +77,42 @@ def main():
     cliffs = [{"from": round(a1, 2), "to": round(b1, 2), "lost": round(d, 2),
                "at_seconds": round(at(a1), 1) if (not pct_axis or dur) else None}
               for _, a1, b1, d in drops[:5] if d > 0.8]
-    mid = [d for d, x0, _, _ in [(r[0], r[1], r[2], r[3]) for r in drops] if x0 > cutoff]
+    mid = [rate for rate, x0, _, _ in drops if x0 > cutoff]
     slide = sum(mid) / len(mid) if mid else 0
     said = {}
-    if tr and os.path.exists(tr):
-        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "yt-edit"))
-        from deadair import load as load_cues
-        cues = load_cues(tr)
-        for c in cliffs:
-            if c["at_seconds"] is None: continue
-            t = c["at_seconds"]
-            near = [q[2] for q in cues if q[0] <= t + 4 and q[1] >= t - 4]
-            said[str(c["from"])] = " ".join(near)[:140]
-    out = {"points": len(rows), "start": start, "hook_leak": round(hook_leak, 2),
-           "end": ys[-1], "cliffs": cliffs, "slide_per_unit": round(slide, 3), "said": said}
-    if as_json: print(json.dumps(out, indent=1)); return
-    print(f"\n  {files[0]}   {len(rows)} points   {ys[0]:.1f}% -> {ys[-1]:.1f}%\n")
+    for c in cliffs if cues else []:
+        if c["at_seconds"] is None: continue
+        t = c["at_seconds"]
+        near = [q[2] for q in cues if q[0] <= t + 4 and q[1] >= t - 4]
+        said[str(c["from"])] = " ".join(near)[:140]
+    return {"points": len(rows), "axis": axis, "start": start, "hook_leak": round(hook_leak, 2),
+            "end": ys[-1], "cliffs": cliffs, "slide_per_unit": round(slide, 3), "said": said}
+
+def main():
+    setup_stdio()
+    p = argparse.ArgumentParser()
+    p.add_argument("csv", nargs="?")
+    p.add_argument("--transcript")
+    p.add_argument("--duration", type=float)
+    p.add_argument("--axis", choices=("auto", "seconds", "percent"), default="auto")
+    p.add_argument("--json", action="store_true")
+    args = p.parse_args()
+    if not args.csv or not os.path.exists(args.csv): print(__doc__); sys.exit(1)
+    rows, header = load_csv(args.csv)
+    if len(rows) < 8: print("could not read at least 8 data points from that csv"); sys.exit(1)
+    xs = [r[0] for r in rows]
+    if args.axis == "auto": axis, why = detect_axis(xs, header, args.duration)
+    else: axis, why = args.axis, "--axis"
+    cues = load_cues(args.transcript) if args.transcript and os.path.exists(args.transcript) else None
+    if args.transcript and cues is None:
+        print(f"  note: transcript {args.transcript} not found - skipping what-was-said", file=sys.stderr)
+    if cues and axis == "percent" and not args.duration:
+        print("  note: percent axis with no --duration - cannot place cliffs in the transcript", file=sys.stderr)
+    out = analyse(rows, axis, args.duration, cues)
+    out["axis_from"] = why
+    if args.json: print(dumps(out)); return
+    hook_leak, cliffs, said, slide = out["hook_leak"], out["cliffs"], out["said"], out["slide_per_unit"]
+    print(f"\n  {args.csv}   {len(rows)} points   {rows[0][1]:.1f}% -> {rows[-1][1]:.1f}%   axis {axis} ({why})\n")
     verdict = "healthy" if hook_leak < 25 else "leaking" if hook_leak < 40 else "severe"
     print(f"  HOOK LEAK   {hook_leak:.1f}% lost in the opening   [{verdict}]")
     print(f"              under 25 is healthy for this length. Fix the first line before anything else.\n")

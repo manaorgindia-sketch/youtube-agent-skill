@@ -1,0 +1,223 @@
+{
+ "duration": 202.556,
+ "cuts": [
+  {
+   "kind": "FILLER",
+   "start": 2.348,
+   "end": 4.637,
+   "why": "um"
+  },
+  {
+   "kind": "REPEAT",
+   "start": 4.737,
+   "end": 6.382,
+   "why": "restart of \"so today we look at\""
+  },
+  {
+   "kind": "DEAD",
+   "start": 6.607,
+   "end": 7.557,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 9.695,
+   "end": 10.645,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "FILLER",
+   "start": 10.87,
+   "end": 12.486,
+   "why": "uh, so"
+  },
+  {
+   "kind": "DEAD",
+   "start": 12.711,
+   "end": 13.661,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 20.589,
+   "end": 21.539,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "FILLER",
+   "start": 21.764,
+   "end": 24.113,
+   "why": "you know"
+  },
+  {
+   "kind": "DEAD",
+   "start": 24.338,
+   "end": 25.288,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 30.447,
+   "end": 31.397,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 35.243,
+   "end": 36.193,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "FILLER",
+   "start": 39.189,
+   "end": 42.641,
+   "why": "okay right"
+  },
+  {
+   "kind": "DEAD",
+   "start": 49.92,
+   "end": 50.87,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 54.245,
+   "end": 55.195,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 61.389,
+   "end": 63.439,
+   "why": "2.50s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 75.817,
+   "end": 76.767,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 80.607,
+   "end": 80.957,
+   "why": "0.80s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 83.526,
+   "end": 84.476,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 93.469,
+   "end": 93.819,
+   "why": "0.80s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 97.536,
+   "end": 97.886,
+   "why": "0.80s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 101.201,
+   "end": 101.551,
+   "why": "0.80s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 106.427,
+   "end": 106.777,
+   "why": "0.80s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 110.108,
+   "end": 111.058,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 114.807,
+   "end": 116.857,
+   "why": "2.50s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 119.014,
+   "end": 121.064,
+   "why": "2.50s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 131.807,
+   "end": 132.157,
+   "why": "0.80s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 135.606,
+   "end": 137.656,
+   "why": "2.50s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 139.652,
+   "end": 140.602,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 143.148,
+   "end": 145.198,
+   "why": "2.50s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 154.761,
+   "end": 156.811,
+   "why": "2.50s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 168.945,
+   "end": 169.895,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 172.014,
+   "end": 174.064,
+   "why": "2.50s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 179.462,
+   "end": 179.812,
+   "why": "0.80s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 181.817,
+   "end": 182.767,
+   "why": "1.40s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 186.37,
+   "end": 186.72,
+   "why": "0.80s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 188.713,
+   "end": 190.763,
+   "why": "2.50s gap"
+  }
+ ],
+ "removed": 44.801,
+ "out": 157.755
+}

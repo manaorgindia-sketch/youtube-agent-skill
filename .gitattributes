@@ -1,0 +1,8 @@
+# LF everywhere, on every OS. The repository already stores LF; this stops core.autocrlf on
+# Windows from converting the working copy and keeps fixture bytes identical across machines.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.gif binary
+*.pdf binary
